@@ -1,5 +1,5 @@
 {
-	"name": "ozzyfant/AccountsClientPHP",
+	"name": "ozzyfant/accounts-client-php",
 	"description": "Minecraft AccountsClient for PHP. Conversion of names -> id and vice versa.",
 	"minimum-stability": "stable",
 	"license": "GNU GPL 3.0",
