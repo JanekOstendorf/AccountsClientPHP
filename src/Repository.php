@@ -7,10 +7,21 @@
 
 namespace minecraftAccounts;
 
+use Guzzle\Http\Client;
+
 /**
  * Class Repository. Mother class for Name- and UUID-Repos
  * @package minecraftAccounts
  */
 abstract class Repository {
+
+	protected $httpClient = null;
+
+	public function __construct(Client $httpClient = null) {
+		if(is_null($httpClient))
+			$this->httpClient = new Client();
+		else
+			$this->httpClient = $httpClient;
+	}
 
 } 

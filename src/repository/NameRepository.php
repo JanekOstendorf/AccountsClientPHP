@@ -7,9 +7,27 @@
 
 namespace minecraftAccounts\repository;
 
-
+use minecraftAccounts\AccountNotFoundException;
 use minecraftAccounts\Repository;
+use minecraftAccounts\UUID;
 
+/**
+ * Conversion from UUID -> name
+ * @package minecraftAccounts\repository
+ */
 class NameRepository extends Repository {
-	// Converts UUIDs to Names
-} 
+
+	public function fetchUserName(UUID $uuid) {
+		$baseUrl = 'https://sessionserver.mojang.com/session/minecraft/profile/';
+		$request = $this->httpClient->createRequest('GET', $baseUrl.$uuid->getUnformatted());
+		$response = $request->send();
+
+		if($response->getStatusCode() == 204) {
+			throw new AccountNotFoundException();
+		}
+
+		$json = $response->json();
+		return $json['name'];
+	}
+
+}

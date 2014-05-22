@@ -8,8 +8,23 @@
 namespace minecraftAccounts\repository;
 
 
+use minecraftAccounts\AccountNotFoundException;
 use minecraftAccounts\Repository;
+use minecraftAccounts\UUID;
 
 class UUIDRepository extends Repository {
-	// Converts Names to UUID
+
+	public function fetchUUID($userName) {
+		$baseUrl = 'https://api.mojang.com/profiles/minecraft';
+		$request = $this->httpClient->createRequest('POST', $baseUrl, ['Content-Type' => 'application/json'], json_encode([$userName]));
+		$response = $request->send();
+
+		$json = $response->json();
+		if(empty($json)) {
+			throw new AccountNotFoundException();
+		}
+
+		return UUID::fromString($json[0]['id']);
+	}
+
 } 
