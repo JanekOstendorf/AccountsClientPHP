@@ -7,15 +7,19 @@
 
 require_once 'vendor/autoload.php';
 
-// Examples will be here
+// Create an empty profile
 $player = new \minecraftAccounts\Profile();
+// Set the user name
 $player->setUserName('ozzy2345');
 
+// The Converter might throw some exceptions, catch them
 try {
-	\minecraftAccounts\Converter::completeProfile($player);
+	$player = \minecraftAccounts\Converter::completeProfile($player);
 } catch(\minecraftAccounts\AccountNotFoundException $e) {
 	echo 'This account could\'t be found.';
+} catch(InvalidArgumentException $e) {
+	echo 'You need to specify at least user name or UUID on your player.';
 }
 
 print_r($player->getUserName()); // ozzy2345
-print_r((string)$player->getUuid()); // c709e602-680b-4045-9dbe-00e47f3f4b4b
+print_r($player->getUuid()->getFormatted()); // c709e602-680b-4045-9dbe-00e47f3f4b4b
