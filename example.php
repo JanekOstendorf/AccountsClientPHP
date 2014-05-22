@@ -21,5 +21,5 @@ try {
 	echo 'You need to specify at least user name or UUID on your player.';
 }
 
-print_r($player->getUserName()); // ozzy2345
-print_r($player->getUuid()->getFormatted()); // c709e602-680b-4045-9dbe-00e47f3f4b4b
+var_dump($player->getUserName()); // ozzy2345
+var_dump($player->getUuid()->getFormatted()); // c709e602-680b-4045-9dbe-00e47f3f4b4b
