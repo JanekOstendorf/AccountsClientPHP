@@ -1,0 +1,17 @@
+{
+	"name": "ozzyfant/MinecraftAccounts",
+	"description": "Library for converting Minecraft user names to UUIDs and vice versa.",
+	"minimum-stability": "stable",
+	"authors": [
+		{
+			"name": "Janek \"ozzyfant\" Ostendorf",
+			"email": "ozzy@ozzyfant.de"
+		}
+	],
+	"require": {
+		"guzzle/http": "v3.9.1"
+	},
+	"autoload": {
+		"psr-4": {"minecraftAccounts\\": "src/"}
+	}
+}
