@@ -1,57 +1,56 @@
 <?php
 /**
- * @author Janek Ostendorf (ozzyfant) <ozzy@ozzyfant.de>
- * @copyright Copyright (c) 2014 ozzyfant
- * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
+ * @author    Janek "ozzyfant" Ostendorf <ozzy@ozzyfant.de>
+ * @copyright Copyright (c) 2014 Janek Ostendorf
+ * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-namespace AccountsClientPHP;
+namespace minecraftAccounts;
 
+/**
+ * Represents a Minecraft Profile
+ * @package minecraftAccounts
+ */
 class Profile {
+
 	/**
-	 * UUID
+	 * Minecraft user name
 	 * @var string
 	 */
-	protected $id = '';
+	protected $userName = '';
 
 	/**
-	 * Username
-	 * @var string
+	 * Minecraft UUID
+	 * @var UUID
 	 */
-	protected $name = '';
-
-	public function __construct($json = null) {
-		if($json !== null) {
-			$this->setID($json['id']);
-			$this->setName($json['name']);
-		}
-	}
+	protected $uuid = null;
 
 	/**
-	 * @param string $id
+	 * @param string $userName
 	 */
-	public function setID($id) {
-		$this->id = $id;
+	public function setUserName($userName) {
+		$this->userName = $userName;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getID() {
-		return $this->id;
+	public function getUserName() {
+		return $this->userName;
 	}
 
 	/**
-	 * @param string $name
+	 * @param UUID $uuid
 	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setUuid(UUID $uuid) {
+		$this->uuid = $uuid;
 	}
 
 	/**
-	 * @return string
+	 * @return UUID
 	 */
-	public function getName() {
-		return $this->name;
+	public function getUuid() {
+		return $this->uuid;
 	}
+
 } 
