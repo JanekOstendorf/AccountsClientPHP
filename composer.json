@@ -1,5 +1,5 @@
 {
-	"name": "ozzyfant/MinecraftAccounts",
+	"name": "ozzyfant/minecraft-accounts",
 	"description": "Library for converting Minecraft user names to UUIDs and vice versa.",
 	"minimum-stability": "stable",
 	"authors": [
