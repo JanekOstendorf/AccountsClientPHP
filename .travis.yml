@@ -6,4 +6,4 @@ php:
 install:
   - composer install --prefer-source
 script:
-  - script: ./vendor/bin/phpunit --configuration test/phpunit.xml
+  - ./vendor/bin/phpunit --configuration ./test/phpunit.xml
