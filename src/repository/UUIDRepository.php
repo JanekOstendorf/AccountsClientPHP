@@ -8,7 +8,7 @@
 namespace minecraftAccounts\repository;
 
 
-use minecraftAccounts\AccountNotFoundException;
+use minecraftAccounts\exception\AccountNotFoundException;
 use minecraftAccounts\Repository;
 use minecraftAccounts\UUID;
 

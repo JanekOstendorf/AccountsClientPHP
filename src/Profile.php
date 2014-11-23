@@ -68,7 +68,7 @@ class Profile {
 	}
 
 	/**
-	 * @param $json Response JSON from API
+	 * @param array $json Response JSON from API
 	 * @return Profile
 	 * @throws \InvalidArgumentException
 	 */

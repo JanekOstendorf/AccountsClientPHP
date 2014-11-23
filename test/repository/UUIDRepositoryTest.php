@@ -24,6 +24,9 @@ class UUIDRepositoryTest extends \PHPUnit_Framework_TestCase {
 		$uuid = $repository->fetchUUID($username);
 		$this->assertInstanceOf('\minecraftAccounts\UUID', $uuid);
 		$this->assertEquals($uuid, UUID::fromString('069a79f444e94726a5befca90e38aaf5'));
+
+		// The API has a connection throttle to allow one query per minute. So we need to sleep zzZZzz
+		sleep(61);
 	}
 
 	public function testNotExistingName() {
@@ -33,9 +36,12 @@ class UUIDRepositoryTest extends \PHPUnit_Framework_TestCase {
 		// Check if instanced correctly
 		$this->assertInstanceOf('\minecraftAccounts\repository\UUIDRepository', $repository);
 
-		$this->setExpectedException('\minecraftAccounts\AccountNotFoundException');
+		$this->setExpectedException('\minecraftAccounts\exception\AccountNotFoundException');
 		$uuid = $repository->fetchUUID($username);
 		$this->assertNull($uuid);
+
+		// The API has a connection throttle to allow one query per minute. So we need to sleep zzZZzz
+		sleep(61);
 	}
 
 }
