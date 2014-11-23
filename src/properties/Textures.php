@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Janek
- * Date: 22.11.14
- * Time: 20:01
+ * @author    Janek "ozzyfant" Ostendorf <ozzy@ozzyfant.de>
+ * @copyright Copyright (c) 2014 Janek Ostendorf
+ * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
 namespace minecraftAccounts\properties;
