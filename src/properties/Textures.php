@@ -64,9 +64,9 @@ class Textures {
 			$this->hasSkin = true;
 			$this->skinURL = $textures['textures']['SKIN']['url'];
 		}
-		if(isset($textures->textures->CAPE->url)) {
-			$this->hasSkin = true;
-			$this->skinURL = $textures['textures']['CAPE']['url'];
+		if(isset($textures['textures']['CAPE']['url'])) {
+			$this->hasCape = true;
+			$this->capeURL = $textures['textures']['CAPE']['url'];
 		}
 	}
 
