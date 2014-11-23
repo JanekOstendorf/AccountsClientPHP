@@ -6,6 +6,7 @@
  */
 
 namespace minecraftAccounts;
+use minecraftAccounts\properties\Textures;
 
 /**
  * Represents a Minecraft Profile
@@ -26,11 +27,15 @@ class Profile {
 	protected $uuid = null;
 
 	/**
-	 * @param string $userName
+	 * Raw properties from response
+	 * @var array
 	 */
-	public function setUserName($userName) {
-		$this->userName = $userName;
-	}
+	protected $propertiesRaw = [];
+
+	/**
+	 * @var Textures
+	 */
+	protected $textures = null;
 
 	/**
 	 * @return string
@@ -40,17 +45,62 @@ class Profile {
 	}
 
 	/**
-	 * @param UUID $uuid
-	 */
-	public function setUuid(UUID $uuid) {
-		$this->uuid = $uuid;
-	}
-
-	/**
 	 * @return UUID
 	 */
 	public function getUuid() {
 		return $this->uuid;
 	}
 
+	/**
+	 * @return array
+	 */
+	public function getPropertiesRaw() {
+		return $this->propertiesRaw;
+	}
+
+	/**
+	 * @return Textures
+	 */
+	public function getTextures() {
+		if($this->textures === null)
+			$this->textures = new Textures($this);
+		return $this->textures;
+	}
+
+	/**
+	 * @param $json Response JSON from API
+	 * @return Profile
+	 * @throws \InvalidArgumentException
+	 */
+	public static function createFromJSON($json) {
+		if($json === null)
+			throw new \InvalidArgumentException('Input needs to be JSON.');
+
+		// Read
+		$profile = new Profile();
+		$profile->uuid = UUID::fromString($json['id']);
+		$profile->userName = $json['name'];
+		$profile->propertiesRaw = $json['properties'];
+
+		return $profile;
+	}
+
+	/**
+	 * @param $userName
+	 * @return Profile
+	 */
+	public static function createFromName($userName) {
+		// Fetch UUID first
+		$uuid = Converter::nameToUUID($userName);
+
+		return self::createFromUUID($uuid);
+	}
+
+	/**
+	 * @param UUID $uuid
+	 * @return Profile
+	 */
+	public static function createFromUUID(UUID $uuid) {
+		return Converter::fetchProfile($uuid);
+	}
 } 

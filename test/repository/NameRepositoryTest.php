@@ -8,14 +8,14 @@
 namespace repository;
 
 
-use minecraftAccounts\repository\NameRepository;
+use minecraftAccounts\repository\ProfileRepository;
 use minecraftAccounts\UUID;
 
 class NameRepositoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testProperNameConversion() {
 		$uuid = UUID::fromString('069a79f444e94726a5befca90e38aaf5'); // Notch
-		$repository = new NameRepository();
+		$repository = new ProfileRepository();
 
 		// Check if instanced correctly
 		$this->assertInstanceOf('\minecraftAccounts\repository\NameRepository', $repository);
@@ -27,7 +27,7 @@ class NameRepositoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNotExistingID() {
 		$uuid = UUID::fromString('792d656760cb33281a98c5cb0a49c34f'); // I hope this will never exist
-		$repository = new NameRepository();
+		$repository = new ProfileRepository();
 
 		// Check if instanced correctly
 		$this->assertInstanceOf('\minecraftAccounts\repository\NameRepository', $repository);

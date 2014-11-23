@@ -5,7 +5,7 @@
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
  */
 
-namespace minecraftAccounts;
+namespace minecraftAccounts\exception;
 
 
 class AccountNotFoundException extends \Exception {
