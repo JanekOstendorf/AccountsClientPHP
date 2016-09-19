@@ -7,7 +7,7 @@
 
 namespace minecraftAccounts\repository;
 
-use Guzzle\Http\Exception\ClientErrorResponseException;
+use GuzzleHttp\Exception\ClientException;
 use minecraftAccounts\exception\AccountNotFoundException;
 use minecraftAccounts\exception\TooManyRequestsException;
 use minecraftAccounts\Profile;
@@ -22,11 +22,11 @@ class ProfileRepository extends Repository {
 
 	public function fetchProfile(UUID $uuid) {
 		$baseUrl = 'https://sessionserver.mojang.com/session/minecraft/profile/';
-		$request = $this->httpClient->createRequest('GET', $baseUrl.$uuid->getUnformatted());
+		$request = $this->httpClient->request('GET', $baseUrl.$uuid->getUnformatted());
 
 		try {
-			$response = $request->send();
-		} catch(ClientErrorResponseException $e) {
+			$response = (string)$request->getBody();
+		} catch(ClientException $e) {
 			if($e->getResponse()->getStatusCode() == 429) {
 				throw new TooManyRequestsException();
 			} else {
@@ -34,11 +34,11 @@ class ProfileRepository extends Repository {
 			}
 		}
 
-		if($response->getStatusCode() == 204) {
+		if($request->getStatusCode() == 204) {
 			throw new AccountNotFoundException();
 		}
 
-		$json = $response->json();
+		$json = json_decode($response, true);
 
 		return Profile::createFromJSON($json);
 	}

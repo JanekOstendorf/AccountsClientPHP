@@ -16,10 +16,14 @@ class UUIDRepository extends Repository {
 
 	public function fetchUUID($userName) {
 		$baseUrl = 'https://api.mojang.com/profiles/minecraft';
-		$request = $this->httpClient->createRequest('POST', $baseUrl, ['Content-Type' => 'application/json'], json_encode([$userName]));
-		$response = $request->send();
+		$request = $this->httpClient->request('POST', $baseUrl, [
+		    'body' => json_encode([
+		        $userName
+            ])
+        ]);
+		$response = (string)$request->getBody();
 
-		$json = $response->json();
+		$json = json_decode($response, true);
 		if(empty($json)) {
 			throw new AccountNotFoundException();
 		}

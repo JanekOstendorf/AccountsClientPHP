@@ -7,7 +7,7 @@
 
 namespace minecraftAccounts;
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 
 /**
  * Class Repository. Mother class for Name- and UUID-Repos
